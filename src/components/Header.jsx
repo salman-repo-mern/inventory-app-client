@@ -4,7 +4,6 @@ import { Upload, Download, Plus } from 'lucide-react';
 const Header = ({ onImport, onExport, onAddClick }) => {
   const fileRef = useRef(null);
 
-  // Simple wrapper to trigger the hidden input
   const handleImportClick = () => {
     fileRef.current?.click();
   };
@@ -12,16 +11,19 @@ const Header = ({ onImport, onExport, onAddClick }) => {
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white border-b">
       
-      {/* App Title */}
-      <div>
-        <h1 className="text-xl font-bold text-gray-800">Inventory Manager</h1>
-        <p className="text-xs text-gray-500">Manage stock and track history</p>
+      <div className="space-y-1">
+        <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+          Inventory Manager
+        </h1>
+        <p className="text-sm text-blue-600 font-medium">
+          Manage stock and track history
+        </p>
       </div>
 
-      {/* Action Buttons */}
+
+
       <div className="flex items-center gap-3">
         
-        {/* Hidden input for file selection */}
         <input 
           ref={fileRef} 
           type="file" 
