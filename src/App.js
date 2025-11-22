@@ -3,7 +3,7 @@ import { Search, Upload, Download, Plus, X, Save, Trash2, Edit2, History, Chevro
 
 // --- CONFIG ---
 // Change this to your deployed backend URL when publishing
-const API_BASE = 'http://localhost:5000/api/products';
+const API_BASE = 'https://inventory-app-server-k5t8.onrender.com/api/products';
 
 const App = () => {
   // --- STATE ---
