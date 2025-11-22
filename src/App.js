@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { Search, Upload, Download, Plus, X, Save, Trash2, Edit2, History, ChevronRight } from 'lucide-react';
 
 // --- CONFIG ---
@@ -28,8 +28,7 @@ const App = () => {
   const fileInputRef = useRef(null);
 
   // --- API CALLS ---
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       const query = new URLSearchParams(filters).toString();
@@ -37,7 +36,6 @@ const App = () => {
       const data = await res.json();
       setProducts(data);
 
-      // Extract unique categories for dropdown
       const uniqueCats = [...new Set(data.map(p => p.category).filter(Boolean))];
       setCategories(uniqueCats);
     } catch (error) {
@@ -45,15 +43,16 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
-  // Debounce Search
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchProducts();
     }, 300);
+
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [filters, fetchProducts]);
+
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
